@@ -1,12 +1,12 @@
 begin 
 identifier assign_op int end_line 
 identifier assign_op int end_line 
-func type identifier o_brackets c_brackets o_cBraces 
+func type identifier o_brackets c_brackets colon 
 if o_brackets identifier o_brackets c_brackets equal_op digit c_brackets colon 
 identifier o_brackets c_brackets end_line 
 output o_brackets string comma digit comma string c_brackets end_line 
 endif 
-c_cBraces 
+endfunc 
 if o_brackets identifier o_brackets c_brackets not_eq identifier c_brackets colon 
 input identifier end_line 
 identifier o_brackets c_brackets end_line 

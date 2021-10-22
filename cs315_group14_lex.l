@@ -15,6 +15,7 @@ endwhile endwhile
 endfor endfor
 return return
 func func
+endfunc endfunc
 input in
 output print
 types "integer"|"float"|"string"|"boolean"
@@ -69,6 +70,7 @@ group_name show_teamM8s
 {float} printf("float ");
 {input} printf("input ");
 {dot}   printf("dot ");
+{endfunc}   printf("endfunc ");
 {output}    printf("output ");
 {return}    printf("return ");
 {not_eq}    printf("not_eq ");
