@@ -1,16 +1,15 @@
 begin
 maxDegree = 360;
 if( readHead() == maxDegree ):
-	while( readHead() != 0 ):
+	while( readHead() > 0 ):
 		turnLeft();
 	endwhile
-	while( readHead() != maxDegree ):
+	while( readHead() < maxDegree ):
 		turnRight();
 	endwhile
 endif
 if( readVelocity() == maxVelocity ):
 	backward();
 endif
-
 
 end

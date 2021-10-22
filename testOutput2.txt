@@ -1,16 +1,15 @@
 begin 
 identifier assign_op int end_line 
-if o_brackets identifier o_brackets c_brackets equal_op identifier c_brackets colon 
-while o_brackets identifier o_brackets c_brackets not_eq digit c_brackets colon 
-identifier o_brackets c_brackets end_line 
+if left_paranthesis identifier left_paranthesis right_paranthesis eq identifier right_paranthesis colon 
+while left_paranthesis identifier left_paranthesis right_paranthesis bigger digit right_paranthesis colon 
+identifier left_paranthesis right_paranthesis end_line 
 endwhile 
-while o_brackets identifier o_brackets c_brackets not_eq identifier c_brackets colon 
-identifier o_brackets c_brackets end_line 
+while left_paranthesis identifier left_paranthesis right_paranthesis smaller identifier right_paranthesis colon 
+identifier left_paranthesis right_paranthesis end_line 
 endwhile 
 endif 
-if o_brackets identifier o_brackets c_brackets equal_op identifier c_brackets colon 
-identifier o_brackets c_brackets end_line 
+if left_paranthesis identifier left_paranthesis right_paranthesis eq identifier right_paranthesis colon 
+identifier left_paranthesis right_paranthesis end_line 
 endif 
-
 
 end

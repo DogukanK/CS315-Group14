@@ -24,6 +24,8 @@ math_op_sub \-
 math_op_div \/
 math_op_mod \%
 math_op_mult \*
+bigger >
+smaller <
 dot "."
 and "&&"
 or "||"
@@ -34,18 +36,18 @@ comma ","
 space_char " "
 bool "true"|"false"
 comment_sign \*\*\*
-o_cBraces "{"
-c_cBraces "}"
-o_brackets "("
-c_brackets ")"
+left_brace "{"
+right_brace "}"
+left_paranthesis "("
+right_paranthesis ")"
 colon ":"
-newline "\n"
+new_line "\n"
 underscore_ch "_"
 digit [0-9]
-int {math_op_add}?{digit}+
+int ({math_op_add}|{math_op_sub})?{digit}+
 float {int}*{dot}?{digit}+
 assign_op (({math_op_add}|{math_op_mult}|{math_op_div}|{math_op_mod}|{math_op_sub})=|=)
-equal_op "=="
+eq "=="
 identifier [a-zA-Z][a-zA-Z0-9]*
 string \'({identifier}|{int}|{math_op_div}|{math_op_add}|{math_op_mod}|{math_op_mult}|{math_op_sub}|{space_char}|{dot})*\'
 group_name show_teamM8s  
@@ -70,6 +72,8 @@ group_name show_teamM8s
 {float} printf("float ");
 {input} printf("input ");
 {dot}   printf("dot ");
+{bigger}    printf("bigger ");
+{smaller}   printf("smaller ");
 {endfunc}   printf("endfunc ");
 {output}    printf("output ");
 {return}    printf("return ");
@@ -80,7 +84,7 @@ group_name show_teamM8s
 {comma}     printf("comma ");
 {string}    printf("string ");
 {group_name}   printf("Idil Yilmaz, Dogukan Ertunga Kurnaz, Turgut Alp Edis ");
-{equal_op}  printf("equal_op ");
+{eq}  printf("eq ");
 {math_op_add}   printf("math_op_add ");
 {math_op_mult}  printf("math_op_mult ");
 {math_op_sub}   printf("math_op_sub ");
@@ -88,15 +92,15 @@ group_name show_teamM8s
 {math_op_mod}   printf("math_op_mod ");
 {assign_op}     printf("assign_op ");
 {comment_sign}  printf("comment_sign ");
-{o_cBraces}     printf("o_cBraces ");
-{c_cBraces}     printf("c_cBraces ");
-{o_brackets}    printf("o_brackets ");
-{c_brackets}    printf("c_brackets ");
+{left_brace}     printf("left_brace ");
+{right_brace}     printf("right_brace ");
+{left_paranthesis}    printf("left_paranthesis ");
+{right_paranthesis}    printf("right_paranthesis ");
 {underscore_ch} printf("underscore_ch ");
 {identifier}    printf("identifier ");
 {tab}   ;
 {space_char}    ;
-{newline}       printf("\n");
+{new_line}       printf("\n");
 %%
 
 int main(){
