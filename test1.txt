@@ -1,0 +1,20 @@
+begin
+max = 55;
+maxDegree = 360;
+func integer speedUp(){
+	if ( readVelocity() == 0):
+		forward();
+		print('The speed is increased ', 1, ' km/h.');
+	endif
+}
+if ( readAltitude() != max ):
+	in x;
+	up();
+	print('The altitude is increasing ', 0.1, ' m/s');
+endif
+if ( readHeading != maxDegree ):
+	turnRight();
+else:
+	turnLeft();
+endif
+end
