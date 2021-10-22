@@ -17,4 +17,5 @@ if ( readHeading != maxDegree ):
 else:
 	turnLeft();
 endif
+show_teamM8s;
 end
