@@ -18,7 +18,16 @@ func func
 endfunc endfunc
 input in
 output print
-types "integer"|"float"|"string"|"boolean"
+true "true"
+false "false"
+and "&"
+or "|"
+north "NORTH"
+south "SOUTH"
+west "WEST"
+east "EAST"
+way {north}|{south}|{east}|{west}
+types "integer"|"float"|"string"|"boolean"|"way"
 math_op_add \+
 math_op_sub \-
 math_op_div \/
@@ -27,15 +36,18 @@ math_op_mult \*
 bigger >
 smaller <
 dot "."
-and "&&"
-or "||"
+and_relational "&&"
+or_relational "||"
+not "!"
+biggerOrEq >=
+smallerOrEq <=
 not_eq "!="
 end_line ";"
 tab "\t"
 comma ","
 space_char " "
-bool "true"|"false"
-comment_sign \*\*\*
+bool {true}|{false}
+comment_sign "***"
 left_brace "{"
 right_brace "}"
 left_paranthesis "("
@@ -49,6 +61,23 @@ float {int}*{dot}?{digit}+
 assign_op (({math_op_add}|{math_op_mult}|{math_op_div}|{math_op_mod}|{math_op_sub})=|=)
 eq "=="
 identifier [a-zA-Z][a-zA-Z0-9]*
+parameter {types}{identifier}
+turnLeft turnLeft{left_paranthesis}{right_paranthesis}
+turnRight turnRight{left_paranthesis}{right_paranthesis}
+readAltitude readAltitude{left_paranthesis}{right_paranthesis}
+readHeading readHeading{left_paranthesis}{right_paranthesis}
+readVelocity readVelocity{left_paranthesis}{right_paranthesis}
+up up{left_paranthesis}{right_paranthesis} 
+down down{left_paranthesis}{right_paranthesis} 
+stop stop{left_paranthesis}{right_paranthesis} 
+forward forward{left_paranthesis}{right_paranthesis} 
+backward backward{left_paranthesis}{right_paranthesis} 
+readTemp readTemp{left_paranthesis}{right_paranthesis} 
+on on{left_paranthesis}{right_paranthesis} 
+off off{left_paranthesis}{right_paranthesis} 
+connect connect{left_paranthesis}{right_paranthesis} 
+disconnect disconnect{left_paranthesis}{right_paranthesis} 
+status status{left_paranthesis}{right_paranthesis} 
 string \'({identifier}|{int}|{math_op_div}|{math_op_add}|{math_op_mod}|{math_op_mult}|{math_op_sub}|{space_char}|{dot})*\'
 group_name show_teamM8s  
 
@@ -74,6 +103,9 @@ group_name show_teamM8s
 {dot}   printf("dot ");
 {bigger}    printf("bigger ");
 {smaller}   printf("smaller ");
+{biggerOrEq} printf("bigger or equal ");
+{smallerOrEq} printf("smaller or equal ");
+{not}   printf("not ");
 {endfunc}   printf("endfunc ");
 {output}    printf("output ");
 {return}    printf("return ");
@@ -97,6 +129,23 @@ group_name show_teamM8s
 {left_paranthesis}    printf("left_paranthesis ");
 {right_paranthesis}    printf("right_paranthesis ");
 {underscore_ch} printf("underscore_ch ");
+{parameter} printf("parameter ");
+{turnLeft} printf("turnLeft "); 
+{turnRight} printf("turnRight ");
+{readAltitude} printf("readAltitude ");
+{readHeading} printf("readHeading ");
+{readVelocity} printf("readVelocity ");
+{up}    printf("up "); 
+{down} printf("down ");
+{stop} printf("stop ");
+{forward} printf("forward ");
+{backward} printf("backward ");
+{readTemp}  printf("readTemp ");
+{on}  printf("on ");
+{off}  printf("off ");
+{connect}  printf("connect ");
+{disconnect} printf("disconnect ");
+{status}    printf("status ");
 {identifier}    printf("identifier ");
 {tab}   ;
 {space_char}    ;
