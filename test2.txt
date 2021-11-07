@@ -1,15 +1,19 @@
 begin
-maxDegree = 360;
-if( readHead() == maxDegree ):
-	while( readHead() > 0 ):
-		turnLeft();
-	endwhile
-	while( readHead() < maxDegree ):
-		turnRight();
-	endwhile
-endif
-if( readVelocity() == maxVelocity ):
-	backward();
-endif
-
+for( i = 9; i < 55; +):
+    turnRight();
+    if( readHeading() == 30 ):
+        forward();
+        stop();
+        for( i = 0; i < 121; +):
+            turnRight();
+        endfor
+        forward();
+        stop();
+        for( i = 0; i < 121; +):
+            turnRight();
+        endfor
+        forward();
+        stop();
+    endif 
+endfor
 end

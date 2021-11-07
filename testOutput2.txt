@@ -1,15 +1,1 @@
-begin 
-identifier assign_op int end_line 
-if left_paranthesis identifier left_paranthesis right_paranthesis eq identifier right_paranthesis colon 
-while left_paranthesis identifier left_paranthesis right_paranthesis bigger digit right_paranthesis colon 
-turnLeft end_line 
-endwhile 
-while left_paranthesis identifier left_paranthesis right_paranthesis smaller identifier right_paranthesis colon 
-turnRight end_line 
-endwhile 
-endif 
-if left_paranthesis readVelocity eq identifier right_paranthesis colon 
-backward end_line 
-endif 
-
-end
+The program parsed successfully

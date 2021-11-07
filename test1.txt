@@ -1,10 +1,9 @@
 begin
-max = 55;
 maxDegree = 360;
-func integer speedUp():
-	if ( readVelocity() == 0):
-		forward();
-		print('The speed is increased ', 1, ' km/h.');
+func integer speed():
+	if(readVelocity()==0):
+		upper();
+		print('The speed is increased ', 1, ' km/h');
 	endif
 endfunc
 if ( readAltitude() != max ):
@@ -17,5 +16,5 @@ if ( readHeading != maxDegree ):
 else:
 	turnLeft();
 endif
-show_teamM8s;
+
 end
