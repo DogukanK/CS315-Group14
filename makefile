@@ -1,8 +1,8 @@
-cs315_group14: y.tab.c lex.yy.c
-	g++ -std=c++11 -o cs315_group14 y.tab.c 
-y.tab.c: cs315_group14_yacc.y
-	yacc cs315_group14_yacc.y
-lex.yy.c: cs315_group14_lex.l
-	lex cs315_group14_lex.l
+parser: y.tab.c lex.yy.c
+	g++ -std=c++11 -o parser y.tab.c 
+y.tab.c: CS315f21_team14.yacc
+	yacc CS315f21_team14.yacc
+lex.yy.c: CS315f21_team14.lex
+	lex CS315f21_team14.lex
 clean:
-	rm -f lex.yy.c y.tab.c cs315_group14
+	rm -f lex.yy.c y.tab.c parser

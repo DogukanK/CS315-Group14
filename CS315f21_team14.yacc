@@ -79,7 +79,11 @@ stmts:
 stmt:
         expr | comment | loop_types | func_call | func_def | if_stmt | output | input
 comment:
-        COMMENT_SIGN IDENTIFIER COMMENT_SIGN
+        COMMENT_SIGN sentence COMMENT_SIGN
+sentence:
+        sentenceTypes | sentence sentenceTypes
+sentenceTypes:
+        IDENTIFIER | INT | FLOAT | DOT | TYPES | COLON 
 expr:
         math_expr | string_expr | int_expr | bool_expr | float_expr | input_expr
 math_expr:

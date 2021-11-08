@@ -1,14 +1,21 @@
 begin
+*** Check the status of the drone. ***
 if( status() == 'not connected' ):
 	connect();
 endif
+***
+	Input the shape type as string.
+***
 a = in('Enter the shape: ');
 if( a == 'Rectangle' ):
+	*** Enter the sides ***
 	side1 = integer(in('Enter the side1: '));
 	side2 = integer(in('Enter the side2: '));
+	*** Check the altitude and adjust the height. ***
 	while( readAltitude() != 50 ):
 		up();
 	endwhile
+	*** Check the heading and adjust the degree. ***
 	while( readHeading() != 90 ):
 		if( readHeading() > 90 ):
 			turnRight();
@@ -16,6 +23,9 @@ if( a == 'Rectangle' ):
 			turnLeft();
 		endif
 	endwhile
+	***
+		Drawing the rectangle shape and traverse inside the field.
+	***
 	for(i = side2; i > 0; -):
 		on();
 		for(j = 0; j < i; +):
@@ -56,10 +66,13 @@ if( a == 'Rectangle' ):
 		endfor	
 	endfor
 else if ( a == 'Triangle' ):
+	*** Enter the side. ***
 	side = integer(in('Enter the side: '));
+	*** Check the altitude and adjust the height. ***
 	while( readAltitude() != 50 ):
 		up();
 	endwhile
+	*** Check the heading and adjust the degree. ***
 	while( readHeading() != 60 ):
 		if( readHeading() > 60 ):
 			turnRight();
@@ -67,6 +80,9 @@ else if ( a == 'Triangle' ):
 			turnLeft();
 		endif
 	endwhile
+	***
+		Drawing the triangle shape and traverse inside the field.
+	***
 	for( i = side; i > 0; -):
 		on();
 		for(j = 0; j < i; +):
