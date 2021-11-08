@@ -1,19 +1,47 @@
 begin
-for( i = 9; i < 55; +):
+for( i = 0; i < 30; +):
     turnRight();
     if( readHeading() == 30 ):
+        on();
         forward();
         stop();
-        for( i = 0; i < 121; +):
+        off();
+        for( i = 0; i < 120; +):
             turnRight();
         endfor
+        on();
         forward();
         stop();
-        for( i = 0; i < 121; +):
+        off();
+        for( i = 0; i < 120; +):
             turnRight();
         endfor
+        on();
         forward();
         stop();
+        off();
+    else:
+        while( readHeading() != 30 ):
+            turnRight();
+        endwhile
+        on();
+        forward();
+        stop();
+        off();
+        for( i = 0; i < 120; +):
+            turnRight();
+        endfor
+        on();
+        forward();
+        stop();
+        off();
+        for( i = 0; i < 120; +):
+            turnRight();
+        endfor
+        on();
+        forward();
+        stop();
+        off();
     endif 
 endfor
 end

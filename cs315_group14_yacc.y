@@ -81,7 +81,7 @@ stmt:
 comment:
         COMMENT_SIGN IDENTIFIER COMMENT_SIGN
 expr:
-        math_expr | string_expr | int_expr | bool_expr | float_expr
+        math_expr | string_expr | int_expr | bool_expr | float_expr | input_expr
 math_expr:
         math_expr MATH_OP_ADD math_term | math_expr MATH_OP_SUB math_term | math_term
 math_term:
@@ -97,12 +97,19 @@ bool_expr:
         IDENTIFIER ASSIGN_OP BOOL END_LINE
 float_expr:
         IDENTIFIER ASSIGN_OP FLOAT END_LINE
+input_expr:
+        IDENTIFIER ASSIGN_OP input
 relation:
         BIGGER | SMALLER | BIGGEROREQ | SMALLEROREQ
 relational_expr:
         IDENTIFIER relation IDENTIFIER | INT relation INT | FLOAT relation FLOAT 
         | IDENTIFIER EQ IDENTIFIER | IDENTIFIER NOT_EQ IDENTIFIER | INT EQ INT | INT NOT_EQ INT
+        | IDENTIFIER EQ STRING | IDENTIFIER NOT_EQ STRING | IDENTIFIER relation INT | IDENTIFIER relation FLOAT | IDENTIFIER relation DIGIT
+        | IDENTIFIER EQ BOOL | IDENTIFIER NOT_EQ BOOL | IDENTIFIER EQ INT | IDENTIFIER NOT_EQ INT | IDENTIFIER EQ FLOAT | IDENTIFIER NOT_EQ FLOAT
+        | IDENTIFIER EQ DIGIT | IDENTIFIER NOT_EQ DIGIT
         | FLOAT EQ FLOAT | FLOAT NOT_EQ FLOAT 
+        | BOOL AND BOOL | BOOL NOT_EQ BOOL | BOOL EQ BOOL | BOOL OR BOOL
+        | altitude EQ DIGIT | altitude NOT_EQ DIGIT | altitude relation DIGIT
         | altitude EQ INT | altitude NOT_EQ INT | altitude relation INT
         | altitude EQ IDENTIFIER | altitude NOT_EQ IDENTIFIER | altitude relation IDENTIFIER
         | altitude EQ FLOAT | altitude NOT_EQ FLOAT | altitude relation FLOAT
@@ -117,17 +124,22 @@ relational_expr:
         | temp EQ INT | temp NOT_EQ INT | temp EQ FLOAT | temp NOT_EQ FLOAT | temp relation FLOAT | temp relation INT
         | nozzle_stat EQ BOOL | nozzle_stat NOT_EQ BOOL    
         | wifi_conn EQ STRING | wifi_conn NOT_EQ STRING 
+        | LEFT_PARANTHESIS relational_expr RIGHT_PARANTHESIS AND LEFT_PARANTHESIS relational_expr RIGHT_PARANTHESIS 
+        | LEFT_PARANTHESIS relational_expr RIGHT_PARANTHESIS OR LEFT_PARANTHESIS relational_expr RIGHT_PARANTHESIS
+        | NOT LEFT_PARANTHESIS relational_expr RIGHT_PARANTHESIS
 block_stmt:
         stmts RETURN TYPES | stmts 
 if_stmt:
         IF LEFT_PARANTHESIS condition RIGHT_PARANTHESIS COLON block_stmt ELSE COLON block_stmt ENDIF 
         | IF LEFT_PARANTHESIS condition RIGHT_PARANTHESIS COLON block_stmt ENDIF
+        | IF LEFT_PARANTHESIS condition RIGHT_PARANTHESIS COLON block_stmt ELSE IF LEFT_PARANTHESIS condition RIGHT_PARANTHESIS COLON block_stmt ENDIF
 condition:
         relational_expr | func_call
 func_call:
         IDENTIFIER LEFT_PARANTHESIS PARAMETER RIGHT_PARANTHESIS END_LINE | IDENTIFIER LEFT_PARANTHESIS RIGHT_PARANTHESIS END_LINE 
         | TURNLEFT END_LINE | TURNRIGHT END_LINE | READALTITUDE END_LINE | READHEADING END_LINE | READVELOCITY END_LINE
-        | UP END_LINE | DOWN END_LINE | STOP END_LINE | FORWARD END_LINE | BACKWARD END_LINE | READTEMP END_LINE | ON END_LINE | OFF END_LINE | CONNECT END_LINE | DISCONNECT END_LINE | STATUS END_LINE 
+        | UP END_LINE | DOWN END_LINE | STOP END_LINE | FORWARD END_LINE | BACKWARD END_LINE | READTEMP END_LINE 
+        | ON END_LINE | OFF END_LINE | CONNECT END_LINE | DISCONNECT END_LINE | STATUS END_LINE 
 func_def:
         FUNC TYPES IDENTIFIER LEFT_PARANTHESIS PARAMETER RIGHT_PARANTHESIS COLON block_stmt ENDFUNC
         | FUNC TYPES IDENTIFIER LEFT_PARANTHESIS RIGHT_PARANTHESIS COLON block_stmt ENDFUNC
@@ -138,25 +150,25 @@ while:
 for:
         FOR LEFT_PARANTHESIS for_condition RIGHT_PARANTHESIS COLON block_stmt ENDFOR
 for_condition:
-        IDENTIFIER ASSIGN_OP DIGIT END_LINE IDENTIFIER relation INT END_LINE MATH_OP_ADD    
+        IDENTIFIER ASSIGN_OP DIGIT END_LINE relational_expr END_LINE MATH_OP_ADD
+        | IDENTIFIER ASSIGN_OP DIGIT END_LINE relational_expr END_LINE MATH_OP_SUB
+        | IDENTIFIER ASSIGN_OP INT END_LINE relational_expr END_LINE MATH_OP_SUB  
+        | IDENTIFIER ASSIGN_OP INT END_LINE relational_expr END_LINE MATH_OP_ADD
+        | IDENTIFIER ASSIGN_OP IDENTIFIER END_LINE relational_expr END_LINE MATH_OP_SUB         
+        | IDENTIFIER ASSIGN_OP IDENTIFIER END_LINE relational_expr END_LINE MATH_OP_ADD 
 input:
-        INPUT IDENTIFIER END_LINE
+        INPUT LEFT_PARANTHESIS STRING RIGHT_PARANTHESIS END_LINE
+        | TYPES LEFT_PARANTHESIS INPUT LEFT_PARANTHESIS STRING RIGHT_PARANTHESIS RIGHT_PARANTHESIS END_LINE
 output:
         OUTPUT LEFT_PARANTHESIS STRING RIGHT_PARANTHESIS END_LINE 
         | OUTPUT LEFT_PARANTHESIS STRING COMMA DIGIT COMMA STRING RIGHT_PARANTHESIS END_LINE 
         | OUTPUT LEFT_PARANTHESIS STRING COMMA FLOAT COMMA STRING RIGHT_PARANTHESIS END_LINE 
-turn_heading:
-        TURNLEFT | TURNRIGHT
 altitude:
         READALTITUDE
 heading:
         READHEADING
 velocity:
         READVELOCITY
-go_vertical:
-        UP | DOWN | STOP
-go_horizontal:
-        FORWARD | BACKWARD | STOP
 temp:
         READTEMP
 wifi_conn:
@@ -175,9 +187,9 @@ int main(){
     numOfError = 0;
     yyparse();
     if(numOfError > 0){
-        cout<<"The program is invalid with "<<numOfError<<" errors"<<endl;
+        cout<<"Input program is invalid with "<<numOfError<<" errors"<<endl;
     } else {
-        cout<<"The program parsed successfully"<<endl;
+        cout<<"Input program is valid"<<endl;
     }
     return 0;
 }

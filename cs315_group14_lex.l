@@ -17,12 +17,7 @@ true "true"
 false "false"
 and "&"
 or "|"
-north "NORTH"
-south "SOUTH"
-west "WEST"
-east "EAST"
-way {north}|{south}|{east}|{west}
-types "integer"|"float"|"string"|"boolean"|"way"
+types "integer"|"float"|"string"|"boolean"
 math_op_add \+
 math_op_sub \-
 math_op_div \/
@@ -73,7 +68,7 @@ off off{left_paranthesis}{right_paranthesis}
 connect connect{left_paranthesis}{right_paranthesis} 
 disconnect disconnect{left_paranthesis}{right_paranthesis} 
 status status{left_paranthesis}{right_paranthesis} 
-string \'({identifier}|{int}|{math_op_div}|{math_op_add}|{math_op_mod}|{math_op_mult}|{math_op_sub}|{space_char}|{dot}|"/")*\'
+string \'({identifier}|{int}|{math_op_div}|{math_op_add}|{math_op_mod}|{math_op_mult}|{math_op_sub}|{space_char}|{dot}|"/"|{colon})*\'
 %%
 {begin} return START;
 {end}   return END;

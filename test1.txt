@@ -1,20 +1,91 @@
 begin
-maxDegree = 360;
-func integer speed():
-	if(readVelocity()==0):
-		upper();
-		print('The speed is increased ', 1, ' km/h');
-	endif
-endfunc
-if ( readAltitude() != max ):
-	in x;
-	up();
-	print('The altitude is increasing ', 0.1, ' m/s');
+if( status() == 'not connected' ):
+	connect();
 endif
-if ( readHeading != maxDegree ):
-	turnRight();
-else:
-	turnLeft();
+a = in('Enter the shape: ');
+if( a == 'Rectangle' ):
+	side1 = integer(in('Enter the side1: '));
+	side2 = integer(in('Enter the side2: '));
+	while( readAltitude() != 50 ):
+		up();
+	endwhile
+	while( readHeading() != 90 ):
+		if( readHeading() > 90 ):
+			turnRight();
+		else:
+			turnLeft();
+		endif
+	endwhile
+	for(i = side2; i > 0; -):
+		on();
+		for(j = 0; j < i; +):
+			forward();
+		endfor
+		stop();
+		off();
+		for(j = 0; j < 90; +):
+			turnLeft();
+		endfor
+		on();
+		for(j = 0; j < side1; +):
+			forward();
+		endfor
+		stop();
+		off();
+		for(j = 0; j < 90; +):
+			turnLeft();
+		endfor
+		on();
+		for(j = 0; j < i; +):
+			forward();
+		endfor
+		stop();
+		off();
+		for(j = 0; j < 90; +):
+			turnLeft();
+		endfor
+		side1 -= 1;
+		on();
+		for(j = 0; j < side1; +):
+			forward();
+		endfor
+		stop();
+		off();
+		for(j = 0; j < 90; +):
+			turnLeft();
+		endfor	
+	endfor
+else if ( a == 'Triangle' ):
+	side = integer(in('Enter the side: '));
+	while( readAltitude() != 50 ):
+		up();
+	endwhile
+	while( readHeading() != 60 ):
+		if( readHeading() > 60 ):
+			turnRight();
+		else:
+			turnLeft();
+		endif
+	endwhile
+	for( i = side; i > 0; -):
+		on();
+		for(j = 0; j < i; +):
+			forward();
+		endfor
+		stop();
+		off();
+		for(j = 0; j < 120; +):
+			turnRight();
+		endfor
+		on();
+		for(j = 0; j < i; +):
+			forward();
+		endfor
+		stop();
+		off();
+		for(j = 0; j < 120; +):
+			turnRight();
+		endfor
+	endfor
 endif
-
 end
